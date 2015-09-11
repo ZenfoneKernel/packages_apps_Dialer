@@ -17,8 +17,10 @@
 package com.android.dialer.calllog;
 
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.provider.Settings;
 import android.provider.VoicemailContract;
 import android.util.Log;
 
@@ -34,11 +36,14 @@ public class CallLogReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (VoicemailContract.ACTION_NEW_VOICEMAIL.equals(intent.getAction())) {
-            Intent serviceIntent = new Intent(context, CallLogNotificationsService.class);
-            serviceIntent.setAction(CallLogNotificationsService.ACTION_UPDATE_NOTIFICATIONS);
-            serviceIntent.putExtra(
-                    CallLogNotificationsService.EXTRA_NEW_VOICEMAIL_URI, intent.getData());
-            context.startService(serviceIntent);
+			boolean disable = Settings.Exodus.getInt(context.getContentResolver(), Settings.Exodus.VOICEMAIL_NOTIFICATIONS, 0) == 1;
+			if (!disable) {
+				Intent serviceIntent = new Intent(context, CallLogNotificationsService.class);
+				serviceIntent.setAction(CallLogNotificationsService.ACTION_UPDATE_NOTIFICATIONS);
+				serviceIntent.putExtra(
+						CallLogNotificationsService.EXTRA_NEW_VOICEMAIL_URI, intent.getData());
+				context.startService(serviceIntent);
+			}
         } else if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
             Intent serviceIntent = new Intent(context, CallLogNotificationsService.class);
             serviceIntent.setAction(CallLogNotificationsService.ACTION_UPDATE_NOTIFICATIONS);
