@@ -146,6 +146,7 @@ public class SpeedDialActivity extends TransactionSafeActivity implements OnItem
         public void onPickPhoneNumberAction(Uri dataUri) {
             PhoneNumberInteraction.startInteractionForPhoneCall(
                     SpeedDialActivity.this, dataUri, CALL_ORIGIN_DIALTACTS);
+            finishActivity();
         }
 
         @Override
@@ -162,6 +163,7 @@ public class SpeedDialActivity extends TransactionSafeActivity implements OnItem
                     IntentUtil.getVideoCallIntent(phoneNumber, CALL_ORIGIN_DIALTACTS) :
                     IntentUtil.getCallIntent(phoneNumber, CALL_ORIGIN_DIALTACTS);
             DialerUtils.startActivityWithErrorToast(SpeedDialActivity.this, intent);
+            finishActivity();
         }
 
         @Override
@@ -429,17 +431,18 @@ public class SpeedDialActivity extends TransactionSafeActivity implements OnItem
 
         if (DeviceUtils.isPackageInstalled(this, "com.android.contacts")) {
             try {
-				openContactApplication("com.android.contacts");
-			} catch (Exception e) {
-			}
+                openContactApplication("com.android.contacts");
+            } catch (Exception e) {
+            }
         } else if (DeviceUtils.isPackageInstalled(this, "com.google.android.contacts")) {
-			try {
-				openContactApplication("com.google.android.contacts");
-			} catch (Exception e) {
-			}
-		} else {
-			Toast.makeText(this, R.string.no_contact_application, Toast.LENGTH_SHORT).show();
-		}
+            try {
+                openContactApplication("com.google.android.contacts");
+            } catch (Exception e) {
+            }
+        } else {
+            Toast.makeText(this, R.string.no_contact_application, Toast.LENGTH_SHORT).show();
+        }
+        finishActivity();
     }
 
     private boolean openContactApplication(String packageName) {
