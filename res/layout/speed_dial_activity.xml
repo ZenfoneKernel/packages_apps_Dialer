@@ -46,10 +46,10 @@
 
     <com.android.dialer.widget.EmptyContentView
         android:id="@+id/empty_list_view"
-        android:layout_width="wrap_content"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="#59000000"
+        android:background="@drawable/empty_container_background"
         android:visibility="gone"/>
 
 </FrameLayout>

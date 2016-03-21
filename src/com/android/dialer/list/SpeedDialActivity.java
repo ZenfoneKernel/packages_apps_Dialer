@@ -94,6 +94,8 @@ public class SpeedDialActivity extends TransactionSafeActivity implements OnItem
     private View mContactTileFrame;
     private EmptyContentView mEmptyView;
 
+    private boolean mActive = false;
+
     private final HashMap<Long, Integer> mItemIdTopMap = new HashMap<Long, Integer>();
     private final HashMap<Long, Integer> mItemIdLeftMap = new HashMap<Long, Integer>();
 
@@ -273,6 +275,15 @@ public class SpeedDialActivity extends TransactionSafeActivity implements OnItem
             mEmptyView.setDescription(R.string.permission_no_speeddial);
             mEmptyView.setActionLabel(R.string.permission_single_turn_on);
         }
+        
+        Log.e(TAG, "mActive is " + mActive);
+        
+        if (mActive) {
+			mActive = false;
+			finishActivity();
+		} else {
+			mActive = true;
+		}
     }
 
     public boolean hasFrequents() {
