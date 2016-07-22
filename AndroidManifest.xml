@@ -296,16 +296,6 @@
                   android:screenOrientation="nosensor" >
         </activity>
 
-        <activity android:name="com.android.dialer.list.SpeedDialActivity"
-                  android:theme="@android:style/Theme.Translucent"
-                  android:label="@string/speed_dial_activity"
-                  android:hardwareAccelerated="true"
-                  android:showOnLockScreen="true"
-                  android:excludeFromRecents="true"
-                  android:launchMode="singleInstance"
-                  android:exported="true" >
-        </activity>
-
         <!-- BroadcastReceiver for receiving Intents from Notification mechanism. -->
         <receiver android:name="com.android.incallui.NotificationBroadcastReceiver"
                   android:exported="false" />

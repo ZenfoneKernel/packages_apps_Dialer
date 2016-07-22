@@ -155,7 +155,7 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
 
     private View mParentView;
 
-    private DraggablePhoneFavoriteListView mListView;
+    private PhoneFavoriteListView mListView;
 
     private View mContactTileFrame;
 
@@ -225,7 +225,7 @@ public class SpeedDialFragment extends Fragment implements OnItemClickListener,
         Trace.beginSection(TAG + " onCreateView");
         mParentView = inflater.inflate(R.layout.speed_dial_fragment, container, false);
 
-        mListView = (DraggablePhoneFavoriteListView) mParentView.findViewById(R.id.contact_tile_list);
+        mListView = (PhoneFavoriteListView) mParentView.findViewById(R.id.contact_tile_list);
         mListView.setOnItemClickListener(this);
         mListView.setVerticalScrollBarEnabled(false);
         mListView.setVerticalScrollbarPosition(View.SCROLLBAR_POSITION_RIGHT);
